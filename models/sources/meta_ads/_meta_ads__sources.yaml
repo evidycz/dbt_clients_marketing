@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: meta_ads
+    database: "evidy-dev-data-raw"
+    schema: "{{ var('client_name', 'client') }}_meta_ads"
+
+    loader: DLT
+
+    tables:
+      - name: campaigns
+      - name: campaigns__action_values
+      - name: campaigns__actions
