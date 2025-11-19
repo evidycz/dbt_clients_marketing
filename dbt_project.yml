@@ -19,6 +19,8 @@ clean-targets: # directories to be removed by `dbt clean`
 vars:
   #  client_name: client
 
+  #  raw_database: gcp-raw-data
+
   #  google_ads_enabled: true
   #  seznam_sklik_enabled: true
   #  meta_ads_enabled: false

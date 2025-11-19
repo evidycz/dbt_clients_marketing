@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: google_analytics
-    database: "evidy-dev-data-raw"
+    database: "{{ var('raw_database', 'gcp-raw-data') }}"
     schema: "{{ var('client_name', 'client') }}_google_analytics"
 
     loader: DLT

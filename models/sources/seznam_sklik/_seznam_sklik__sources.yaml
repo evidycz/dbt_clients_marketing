@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: seznam_sklik
-    database: "evidy-dev-data-raw"
+    database: "{{ var('raw_database', 'gcp-raw-data') }}"
     schema: "{{ var('client_name', 'client') }}_seznam_sklik"
 
     loader: DLT
