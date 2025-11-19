@@ -1,0 +1,31 @@
+with source as (
+
+    select *
+    from {{ source('google_analytics', 'sources') }}
+),
+
+final as (
+
+    select
+        {{ adapter.quote('date') }} as date_day,
+
+        {{ dbt_utils.generate_surrogate_key(["date", "upper(_config_join_key)", "lower(session_source_medium)"]) }} as join_key,
+
+        _dlt_id as row_id,
+        _config_id as property_id,
+        session_campaign_id as campaign_id,
+
+        upper(_config_join_key) as key_name,
+        session_source_medium as source_medium,
+
+        coalesce(sessions, 0) as sessions,
+        coalesce(engaged_sessions, 0) as engaged_sessions,
+        coalesce(total_users, 0) as total_users,
+        coalesce(new_users, 0) as new_users,
+        coalesce(ecommerce_purchases, 0) as purchases,
+        round(cast(coalesce(purchase_revenue, 0) as numeric), 2) as revenue
+
+    from source
+)
+
+select * from final
