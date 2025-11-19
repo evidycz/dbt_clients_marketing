@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: seznam_sklik
+    database: "evidy-dev-data-raw"
+    schema: "{{ var('client_name', 'client') }}_seznam_sklik"
+
+    loader: DLT
+
+    tables:
+      - name: campaigns
