@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: google_ads
+    database: "evidy-dev-data-raw"
+    schema: "{{ var('client_name', 'client') }}_google_ads"
+
+    loader: DLT
+
+    tables:
+      - name: campaigns
