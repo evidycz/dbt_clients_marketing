@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: google_ads
+    database: "{{ var('raw_database', 'gcp-raw-data') }}"
+    schema: "{{ var('client_name', 'client') }}_glami"
+
+    loader: DLT
+
+    tables:
+      - name: categories
