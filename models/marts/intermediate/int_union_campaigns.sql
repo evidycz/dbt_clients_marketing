@@ -1,86 +1,28 @@
+{% set enabled_packages = get_enabled_packages() %}
+
 with
+{% for package in ['google_ads', 'meta_ads', 'seznam_sklik'] %}
+{% if package in enabled_packages %}
+{{ package }} as (
 
-{% if var('google_ads_enabled', True) %}
-google_ads_campaigns as (
+    select
+        *
+    from {{ ref('source_' ~ package ~ '__campaigns') }}
+),
+{% endif %}
+{% endfor %}
 
-    select *
-    from {{ ref('source_google_ads__campaigns') }}
+{% if 'glami' in enabled_packages %}
+glami as (
+
+    select
+        *
+    from {{ ref('source_glami__categories') }}
 ),
 {% endif %}
 
-{% if var('seznam_sklik_enabled', True) %}
-seznam_sklik_campaigns as (
-
-    select *
-    from {{ ref('source_seznam_sklik__campaigns') }}
-),
-{% endif %}
-
-{% if var('meta_ads_enabled', True) %}
-meta_ads_campaigns as (
-
-    select *
-    from {{ ref('source_meta_ads__campaigns') }}
-),
-
-
-meta_ads_events as (
-
-    select *
-    from {{ ref('source_meta_ads__events') }}
-),
-
-join_meta_ads_campaigns_and_events as (
-
-    select 
-        date_day,
-       
-        row_key,
-        join_key,
-
-        account_id,
-        campaign_id,
-        
-        key_name,
-        system_name,
-        source_medium,
-        campaign_name,
-        campaign_status,
-        
-        impressions,
-        clicks,
-        case when event_name = 'purchase' then event_count else 0 end as conversions,
-        case when event_name = 'purchase' then event_value else 0 end as conversion_value,
-        cost
-        
-    from meta_ads_campaigns
-    left join meta_ads_events
-        on meta_ads_campaigns.row_id = meta_ads_events.parent_row_id
-),
-{% endif %}
-
-
-
-union_campaigns as (
-
-    {% if var('google_ads_enabled', True) %}
-    select *
-    from google_ads_campaigns
-
-    union all
-    {% endif %}
-
-    {% if var('seznam_sklik_enabled', True) %}
-    select *
-    from seznam_sklik_campaigns
-    {% endif %}
-
-    {% if var('meta_ads_enabled', True) %}
-    union all
-
-    select *
-    from join_meta_ads_campaigns_and_events
-    {% endif %}
+unioned as (
+    {{ union_ctes(ctes=enabled_packages)}}
 )
 
-select * from union_campaigns
+select * from unioned
