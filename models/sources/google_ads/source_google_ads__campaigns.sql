@@ -22,6 +22,8 @@ final as (
         _config_account_id as account_id,
         id as campaign_id,
 
+        currency_code as system_currency,
+
         upper(_config_join_key) as key_name,
         upper(_config_name) as system_name,
         lower(_config_source_medium) as source_medium,

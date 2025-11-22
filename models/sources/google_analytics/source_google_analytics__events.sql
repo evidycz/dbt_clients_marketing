@@ -15,6 +15,8 @@ final as (
         upper(_config_join_key) as key_name,
         session_source_medium as source_medium,
         event_name,
+
+        currency_code as analytics_currency,
         
         event_count,
         round(cast(event_value as numeric), 2) as event_value

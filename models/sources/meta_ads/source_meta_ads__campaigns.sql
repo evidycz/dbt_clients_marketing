@@ -21,13 +21,15 @@ final as (
         _dlt_id as row_id,
         _config_account_id as account_id,
         campaign_id as campaign_id,
-        
+
+        currency_code as system_currency,
+
         upper(_config_join_key) as key_name,
         upper(_config_name) as system_name,
         lower(_config_source_medium) as source_medium,
         campaign_name as campaign_name,
         'UNKNOWN' as campaign_status,
-        
+
         coalesce(impressions, 0) as impressions,
         coalesce(inline_link_clicks, 0) as clicks,
         round(cast(coalesce(spend, 0.0) as numeric), 2) as cost

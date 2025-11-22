@@ -18,6 +18,9 @@ final as (
         upper(_config_join_key) as key_name,
         session_source_medium as source_medium,
 
+        currency_code as analytics_currency,
+
+
         coalesce(sessions, 0) as sessions,
         coalesce(engaged_sessions, 0) as engaged_sessions,
         coalesce(total_users, 0) as total_users,

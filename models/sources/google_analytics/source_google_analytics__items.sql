@@ -14,7 +14,9 @@ final as (
        
        upper(_config_join_key) as key_name,
        item_name as item_name,
-       
+
+       currency_code as analytics_currency,
+
        coalesce(items_viewed, 0) as items_viewed,
        coalesce(items_viewed_in_list, 0) as items_viewed_in_list,
        coalesce(items_added_to_cart, 0) as items_added_to_cart,

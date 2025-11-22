@@ -10,6 +10,8 @@ sources_agg as (
         campaign_id,
         date_day,
 
+        analytics_currency,
+
         sum(sessions) as sessions,
         sum(engaged_sessions) as engaged_sessions,
         sum(total_users) as total_users,
@@ -17,7 +19,7 @@ sources_agg as (
         sum(purchases) as purchases,
         sum(revenue) as revenue
     from sources
-    group by 1, 2
+    group by 1, 2, 3
 ),
 
 campaigns as (
@@ -55,6 +57,8 @@ joined as (
         coalesce(sources_agg.new_users, 0) as new_users,
         coalesce(sources_agg.purchases, 0) as purchases,
         coalesce(sources_agg.revenue, 0) as revenue,
+
+        sources_agg.analytics_currency as analytics_currency,
 
         coalesce(events_agg.view_item, 0 ) as viewed_item,
         coalesce(events_agg.add_to_cart, 0 ) as added_to_cart,

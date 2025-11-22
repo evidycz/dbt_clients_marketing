@@ -13,6 +13,7 @@ costs as (
         join_key,
         system_name,
         source_medium,
+        system_currency,
         cost
 
     from {{ ref('int_union_campaigns') }}
@@ -39,6 +40,8 @@ aggregated_sources as (
         key_name,
         source_medium,
 
+        analytics_currency,
+
         sum(sessions) as sessions,
         sum(engaged_sessions) as engaged_sessions,
         sum(total_users) as total_users,
@@ -47,7 +50,7 @@ aggregated_sources as (
         sum(revenue) as revenue,
 
     from sources
-    group by 1, 2, 3, 4
+    group by 1, 2, 3, 4, 5
 ),
 
 aggregated_costs as (
@@ -57,10 +60,11 @@ aggregated_costs as (
         join_key,
         system_name,
         source_medium,
+        system_currency,
         sum(cost) as cost,
 
     from costs
-    group by 1,2,3,4
+    group by 1, 2, 3, 4, 5
 ),
 
 joined_sources_and_costs as (
@@ -74,6 +78,7 @@ joined_sources_and_costs as (
 
         aggregated_costs.system_name as system_name,
         aggregated_costs.cost as cost,
+        aggregated_costs.system_currency as system_currency
 
     from aggregated_sources
     left join aggregated_costs
