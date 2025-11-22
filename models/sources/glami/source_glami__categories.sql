@@ -25,13 +25,13 @@ final as (
         upper(_config_name) as system_name,
         lower(_config_source_medium) as source_medium,
         'glami' as campaign_name,
-        'unknown' as campaign_status
+        'unknown' as campaign_status,
 
         0 as impressions,
         coalesce(exit_clicks, 0) as clicks,
         coalesce(orders, 0) as conversions,
         coalesce(gmv, 0) as conversion_value,
-        round(cast(coalesce(cost, 0) as numeric), 2) as cost
+        round(cast(coalesce(costs, 0) as numeric), 2) as cost
 
     from source
 )
