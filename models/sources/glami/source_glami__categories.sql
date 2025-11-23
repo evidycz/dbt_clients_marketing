@@ -21,7 +21,7 @@ final as (
         _config_account_id as account_id,
         replace(replace(lower(_config_source_medium), ' ', ''), '/', '_')  as campaign_id,
 
-        currency_code as analytics_currency,
+        currency_code as system_currency,
 
         upper(_config_join_key) as key_name,
         upper(_config_name) as system_name,
