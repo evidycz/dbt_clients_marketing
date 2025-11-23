@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: google_analytics
-    database: "{{ var('raw_database', 'gcp-raw-data') }}"
+    database: "{{ var('marketing_database').get(target.name, target.database) }}"
     schema: "{{ var('client_name', 'client') }}_google_analytics"
 
     loader: DLT
