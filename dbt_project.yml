@@ -1,5 +1,5 @@
 name: 'dbt_clients_marketing'
-version: '0.2.2'
+version: '0.3.0'
 
 #  profile: 'dbt_clients_marketing'
 
@@ -19,7 +19,10 @@ clean-targets: # directories to be removed by `dbt clean`
 vars:
   #  client_name: client
 
-  #  raw_database: gcp-raw-data
+  #  marketing_database:
+  #    dev: evidy-dev-data-raw
+  #    prod: evidy-prod-data-raw
+
 
   #  glami_enabled: true
   #  google_ads_enabled: true

@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: meta_ads
-    database: "{{ var('raw_database', 'gcp-raw-data') }}"
+    database: "{{ var('marketing_database').get(target.name, target.database) }}"
     schema: "{{ var('client_name', 'client') }}_meta_ads"
 
     loader: DLT
