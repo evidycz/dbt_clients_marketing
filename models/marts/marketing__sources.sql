@@ -37,7 +37,7 @@ aggregated_sources as (
         date_day,
         join_key,
 
-        key_name,
+        config_group,
         source_medium,
 
         analytics_currency,
