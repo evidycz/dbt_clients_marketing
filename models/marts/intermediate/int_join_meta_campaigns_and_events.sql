@@ -25,7 +25,7 @@ purchase_event as (
     from events
     where event_name = 'purchase'
     group by 1
-)
+),
 
 joined as (
 
