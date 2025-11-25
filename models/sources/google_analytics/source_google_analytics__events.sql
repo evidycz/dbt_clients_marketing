@@ -9,10 +9,10 @@ final as (
     select 
         {{ adapter.quote('date') }} as date_day,
         
-        _config_id as property_id,
+        property_id as property_id,
         session_campaign_id as campaign_id,
         
-        upper(_config_join_key) as key_name,
+        upper(config_group) as config_group,
         session_source_medium as source_medium,
         event_name,
 

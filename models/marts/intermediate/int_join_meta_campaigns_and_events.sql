@@ -32,7 +32,6 @@ joined as (
     select
         date_day,
 
-        row_key,
         join_key,
 
         account_id,
@@ -40,7 +39,7 @@ joined as (
 
         system_currency,
 
-        key_name,
+        config_group,
         system_name,
         source_medium,
         campaign_name,

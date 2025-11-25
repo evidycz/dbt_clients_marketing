@@ -9,13 +9,13 @@ final as (
     select
         {{ adapter.quote('date') }} as date_day,
 
-        {{ dbt_utils.generate_surrogate_key(["date", "upper(_config_join_key)", "lower(session_source_medium)"]) }} as join_key,
+        {{ dbt_utils.generate_surrogate_key(["date", "upper(config_group)", "lower(session_source_medium)"]) }} as join_key,
 
         _dlt_id as row_id,
-        _config_id as property_id,
+        property_id as property_id,
         session_campaign_id as campaign_id,
 
-        upper(_config_join_key) as key_name,
+        upper(config_group) as config_group,
         session_source_medium as source_medium,
 
         currency_code as analytics_currency,
